@@ -1,10 +1,16 @@
+import { Search } from "lucide-react";
+import Header from "./_components/header";
+
 const Home = () =>{
 
   
   return(
-    <div className="bg-red-500">
-      <h1>hello word</h1>
-      </div>
+    <>
+    <Header />
+   <div className="px-5 pt-6">
+   <Search />
+   </div>
+    </>
   );
 }
 
