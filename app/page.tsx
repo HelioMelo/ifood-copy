@@ -4,9 +4,24 @@ import Header from "./_components/header";
 import CategoryList from "./_components/category-list";
 import ProductList from "./_components/product-list";
 import { Button } from "./_components/ui/button";
+import { db } from "./_lib/prisma";
 
-const Home = () =>{
-
+const Home = async() =>{
+  const products = await db.product.findMany({
+    where: {
+        discountPercentage: {
+            gt: 0
+        }
+    },
+    take: 10,
+    include:{
+        restaurant: {
+            select:{
+                name:true,
+            },
+        },
+    },
+});
   
   return(
     <>
@@ -43,7 +58,7 @@ const Home = () =>{
           </Button>
       </div>
 
-      <ProductList />
+      <ProductList products={products}/>
 
     </div>
 
